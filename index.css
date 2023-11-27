@@ -1,0 +1,88 @@
+.dark{
+    background-color: aqua;
+}
+
+img{
+    width: 30px;
+    aspect-ratio: 1;
+}
+
+.mainbody{
+    overflow: hidden;
+}
+
+.background{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: bisque;
+    z-index: -1;
+}
+
+.accessbility{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.btn {
+    font-size: 5vh;
+    width: 10vh;
+    aspect-ratio: 1;
+    
+}
+
+.ToggleMode {
+    /* font-size: medium; */
+    /* height: 50px;
+    width: 118px; */
+    margin: 5px;
+    width: fit-content;
+    aspect-ratio: 1;
+}
+
+.justify-content-md-center {
+    -webkit-box-pack: center!important;
+    -ms-flex-pack: center!important;
+    justify-content: center!important;
+}
+
+#OutputHead{
+    width: 40vh;
+    padding: 0px;
+    margin: 4%;
+    align-self: center;
+}
+
+.calcbody{
+    display: flex;
+    flex-direction: column;
+}
+
+/* GOOD CSS */
+/* .keys > .row > .btn{
+    border-radius: 50%;
+} */
+
+
+
+
+@media only screen and (max-width: 427px){
+    /* .justify-content-md-center {
+        -webkit-box-pack: center!important;
+    } */
+
+    .btn {
+        font-size: 5vh;
+        width: 23%;
+        aspect-ratio: 1;
+    }
+
+    /* .ToggleMode{
+        height: 67px;
+        width: 250px;
+    } */
+
+    #OutputHead{
+        width: -webkit-fill-available;
+    }
+}

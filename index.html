@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="index.css" rel="stylesheet">
+
+
+    <title> Calculator </title>
+    <script>
+
+        document.addEventListener("click",function() {
+            let valueButton = event.target.id;
+            document.querySelector("h1").innerHTML += valueButton;
+        })
+
+        document.addEventListener("keydown", ()=>{
+            if (event.keyCode == 13){
+                solution();
+            }else 
+            if (event.keyCode == 8){
+                Backspace();
+            } else 
+            if ( !Number.isNaN( Number(event.key) ) ){
+                document.querySelector("h1").innerHTML += event.key;
+            }
+            else{
+                let array = ['+','-','*','/','.','(',')'];
+                array.forEach( (sign)=>{
+                    if (event.key === sign){
+                        // console.log(event.key);
+                        document.querySelector("h1").innerHTML += event.key;
+                    }
+                })
+            }
+        })
+
+
+        document.addEventListener("keydown",()=>{
+            if (event.keyCode == 13){
+                solution();
+            }else if (event.keyCode == 8){
+                Backspace();
+            }
+        })
+
+
+
+
+        function solution(){
+            let formula = document.querySelector("h1").innerHTML;
+            let answer =  eval(formula);
+            // console.log(answer);
+            document.querySelector("h2").innerHTML = answer ;
+        }
+
+
+        function Backspace(){
+            let formula = document.querySelector("h1").innerHTML;
+            formula = formula.substr(0,formula.length-1);
+            document.querySelector("h1").innerHTML = formula;
+        }
+
+        function AllClear(){
+            document.querySelector("h1").innerHTML = "";
+            document.querySelector("h2").innerHTML = "";
+        }
+
+        // ModeChange
+        function ToggleMode(EnteredClass){
+            let list = document.querySelectorAll(EnteredClass);
+            // console.log(listi);
+            list.forEach((li)=>{
+                // console.log(li.className.replace("light","dark"));
+                if(li.className.search("dark") !== -1){
+                    li.className = li.className.replaceAll("dark","light");
+                }else{
+                    li.className = li.className.replaceAll("light","dark");
+                }
+            });
+
+            let bgElement = document.querySelector(".background");
+            // div.style.color = 'red';
+            // console.log(bgElement);
+            if (bgElement.style.backgroundColor === "bisque" || bgElement.style.backgroundColor === "" ){
+                // div.style.color = 'red';
+                bgElement.style.backgroundColor = "#495057";
+            }else{
+                bgElement.style.backgroundColor = "bisque";
+            }
+
+            let imageElement = document.querySelector("img");
+            if (bgElement.style.backgroundColor === "bisque"){
+                imageElement.src = "https://cdn4.iconfinder.com/data/icons/music-ui-solid-24px/24/moon_dark_mode_night-2-512.png";
+            }else{
+                imageElement.src = "https://cdn2.iconfinder.com/data/icons/bubble-set-general/48/Sun-512.png";
+            }
+        }
+
+    </script>
+
+    <style>
+        h1{
+            overflow-y:hidden;
+        }
+
+        #OutputHead{
+            overflow-x:auto;
+            overflow-y:hidden;
+        }
+    </style>
+
+</head>
+<body class="change bg-light mainbody">
+    <div class="background"></div>
+
+    <div class="accessbility container">
+
+        <button class="ToggleMode" onclick="ToggleMode('.change')">
+            <img src="https://cdn4.iconfinder.com/data/icons/music-ui-solid-24px/24/moon_dark_mode_night-2-512.png" alt="icon">
+        </button>
+            
+    </div>
+
+
+    <div class="calcbody">
+        <div class="container bg-light border my-2 change" id="OutputHead">
+            <h1 class="change btn-light" style="height:70px; margin: 5px;"></h1>
+            <hr class="change btn-light" style="margin:0">
+            <h2 class="change btn-light" style="height:60px; margin: 5px;"></h2>
+        </div>
+            
+         
+        <div class="container keys">
+            <div class="row justify-content-md-center">
+                <button class="btn btn-success border change" onclick="AllClear()">AC</button>
+                <button class="btn btn-light border change" value="(" id="(">(</button>
+                <button class="btn btn-light border change" value=")" id=")">)</button>
+                <button class="btn btn-light border change" value="/" id="/">/</button>
+            </div>
+            <div class="row justify-content-md-center">
+                <button class="btn btn-light border change" value="7" id="7">7</button>
+                <button class="btn btn-light border change" value="8" id="8">8</button>
+                <button class="btn btn-light border change" value="9" id="9">9</button>
+                <button class="btn btn-light border change" value="multiply" id="*">*</button>
+
+            </div>
+            <div class="row justify-content-md-center">
+                <button class="btn btn-light border change" value="4" id="4">4</button>
+                <button class="btn btn-light border change" value="5" id="5">5</button>
+                <button class="btn btn-light border change" value="6" id="6">6</button>
+                <button class="btn btn-light border change" value="substraction" id="-">-</button>
+            </div>
+            <div class="row justify-content-md-center">
+                <button class="btn btn-light border change" value="1" id="1">1</button>
+                <button class="btn btn-light border change" value="2" id="2">2</button>            
+                <button class="btn btn-light border change" value="3" id="3">3</button>
+                <button class="btn btn-light border change" value="summation" id="+">+</button>
+            </div>
+            <div class="row justify-content-md-center">
+                <button class="btn btn-light border change" value="0" id="0">0</button>
+                <button class="btn btn-light border change" value="." id=".">.</button>
+                <button class="btn btn-light border change" onclick="Backspace()">C</button>
+                <button class="btn btn-primary border change" onclick="solution()">=</button>
+            </div>
+        </div>
+    </div>
+
+    
+    
+</body>
+</html>
